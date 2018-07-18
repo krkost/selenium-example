@@ -14,27 +14,18 @@ public class Selenium3 {
 	private static final String CHROME = "webdriver.chrome.driver";
 	private static final String CHROME_PATH = "/home/kristina/AutoCourses/chromedriver/chromedriver";
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 
 		System.setProperty(CHROME, CHROME_PATH);
 
 		WebDriver driver = new ChromeDriver();
 		driver.get("http://www.quizful.net/test");
 		
-		driver.findElement(By.xpath("//*[@id=\"user-panel\"]/li[3]/a")).click();
-		
-		driver.findElement(By.id("login")).click();
+		driver.findElement(By.xpath("//*[@id=\"user-panel\"]/li[3]/a")).click();		
 		driver.findElement(By.id("login")).sendKeys("dbdfbfdg");
-		
-		driver.findElement(By.name("registrationForm.password")).click();
-		driver.findElement(By.name("registrationForm.password")).sendKeys("password");
-		
-		driver.findElement(By.name("registrationForm.repassword")).click();
-		driver.findElement(By.name("registrationForm.repassword")).sendKeys("password");
-		
-		driver.findElement(By.name("registrationForm.email")).click();
-		driver.findElement(By.name("registrationForm.email")).sendKeys("test"+(int)(Math.random()*100)+"qat@tst.tst");
-		
+		driver.findElement(By.name("registrationForm.password")).sendKeys("password");		
+		driver.findElement(By.name("registrationForm.repassword")).sendKeys("password");		
+		driver.findElement(By.name("registrationForm.email")).sendKeys("test"+(int)(Math.random()*100)+"qat@tst.tst");		
 		driver.findElement(By.id("corporate")).click();
 		
 		String capchaVal = JOptionPane.showInputDialog("Input capcha value");
@@ -42,6 +33,8 @@ public class Selenium3 {
 				
 		driver.findElement(By.name("ok")).click();
 		
+		Thread.sleep(2000);
+		driver.close();	
 
 	}
 
