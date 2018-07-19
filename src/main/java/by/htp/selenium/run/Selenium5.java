@@ -29,13 +29,13 @@ public class Selenium5 {
 		while (true) {
 			try {
 				for (WebElement gr : groups) {
-
+					// check if a Group name is not empty
 					if (!gr.findElement(By.className("list-item__page-link")).getText().isEmpty()) {
 
-						System.out.println("Group:" + gr.findElement(By.className("list-item__page-link")).getText());
+						System.out.println("\nGroup:" + gr.findElement(By.className("list-item__page-link")).getText());
 
+						// find all sub-groups
 						List<WebElement> subs = gr.findElements(By.className("panel-section-sublist__item"));
-
 						for (WebElement sub : subs) {
 							System.out.println(sub.findElement(By.className("list-subitem__page-link")).getText());
 						}
@@ -45,6 +45,26 @@ public class Selenium5 {
 				break;
 			}
 			continue;
+		}
+
+		driver.get("https://www.it-academy.by/");
+		driver.findElement(By.xpath("/html/body/div[1]/main/section[2]/section[3]/div/ul/li[10]/a/div[2]/span"))
+				.click();
+
+		List<WebElement> courses = driver.findElements(By.className("course-item-block"));
+		
+		
+		//getting of the preparatory courses
+		System.out.println("\nList of preparatory courses with dates:");
+		for (WebElement course : courses) {
+			System.out.println(course.findElement(By.className("course-item-block__title")).getText());
+
+			try {
+				System.out.println("Course Date:" + course.findElement(By.className("course-item__date")).getText());
+			} catch (NoSuchElementException e) {
+				continue;
+			}
+
 		}
 
 		Thread.sleep(2000);
